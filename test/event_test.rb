@@ -34,6 +34,12 @@ class EventTest < Minitest::Test
     event.add_food_truck(food_truck2)
     event.add_food_truck(food_truck3)
 
+    expected = ["Rocky Mountain Pies", "Ba-Nom-a-Nom", "Palisade Peach Shack"]
     assert_equal [food_truck1, food_truck2, food_truck3], event.food_trucks
+    assert_equal expected, event.food_truck_names
+  end
+
+  def test_trucks_can_sell_items_and_revenue
+
   end
 end
