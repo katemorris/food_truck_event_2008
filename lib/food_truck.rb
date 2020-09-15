@@ -5,19 +5,16 @@ class FoodTruck
     @inventory = {}
   end
 
-  def find_item(item)
-    @inventory.find do |stock_item|
-      stock_item = item
-    end
-  end
-
   def check_stock(item)
-    if find_item(item).nil?
-      0
+    if @inventory.keys.include?(item)
+      @inventory.fetch(item)
     else
-      find_item(item).values
+      0
     end
   end
 
-  
+  def stock(item, amount)
+    @inventory[item] ||= 0
+    @inventory[item] += amount
+  end
 end
