@@ -61,8 +61,8 @@ class EventTest < Minitest::Test
     event.add_food_truck(food_truck2)
     event.add_food_truck(food_truck3)
 
-    assert_equal [food_truck1, food_truck3], event.food_trucks_that_sell('item1')
-    assert_equal [food_truck2], event.food_trucks_that_sell('item4')
+    assert_equal [food_truck1, food_truck3], event.food_trucks_that_sell(item1)
+    assert_equal [food_truck2], event.food_trucks_that_sell(item4)
 
     assert_equal 148.75, food_truck1.potential_revenue
     assert_equal 345.00, food_truck2.potential_revenue
@@ -98,7 +98,7 @@ class EventTest < Minitest::Test
 
     assert_equal [item1], event.overstocked_items
 
-    expected {
+    expected = {
       item1 => {quantity: 100, food_trucks: [food_truck1, food_truck3]},
       item2 => {quantity: 7, food_trucks: [food_truck1]},
       item4 => {quantity: 50, food_trucks: [food_truck2]},
