@@ -15,7 +15,9 @@ class Event
     end
   end
 
-  def method_name
-
+  def food_trucks_that_sell(item)
+    @food_trucks.select do |truck|
+      truck.inventory.include?(item)
+    end
   end
 end
