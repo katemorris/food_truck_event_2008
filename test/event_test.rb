@@ -96,8 +96,6 @@ class EventTest < Minitest::Test
     expected_names = ["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"]
     assert_equal expected_names, event.sorted_item_list
 
-    assert_equal [item1], event.overstocked_items
-
     expected = {
       item1 => {quantity: 100, food_trucks: [food_truck1, food_truck3]},
       item2 => {quantity: 7, food_trucks: [food_truck1]},
@@ -106,6 +104,8 @@ class EventTest < Minitest::Test
     }
 
     assert_equal expected, event.total_inventory
+
+    assert_equal [item1], event.overstocked_items
   end
 
   def test_it_can_return_sorted_list_of_items

@@ -21,17 +21,52 @@ class Event
     end
   end
 
-  def sorted_item_list
-    food_list = []
+  def item_list
+    list = []
     @food_trucks.each do |truck|
       truck.inventory.each do |item, amount|
-        food_list << item.name
+        list << item
       end
     end
-    food_list.uniq.sort_by { |name| name }
+    list
+  end
+
+  def sorted_item_list
+    name_list = item_list.map do |item|
+      item.name
+    end
+    name_list.uniq.sort_by { |name| name }
+  end
+
+  def total_quanitity_item_truck(item)
+    food_trucks_that_sell(item).sum do |truck|
+      truck.inventory.sum do |truck_item, amount|
+        if truck_item == item
+          amount
+        else
+          0
+        end
+      end
+    end
+  end
+
+  def data_about_item(item)
+    data = {}
+    data[:quantity] = total_quanitity_item_truck(item)
+    data[:food_trucks] = food_trucks_that_sell(item)
+    data
+  end
+
+  def total_inventory
+    starting = {}
+    item_list.each do |item|
+      starting[item] ||= {}
+      starting[item] = data_about_item(item)
+    end
+    starting
   end
 
   def overstocked_items
-
+    item_list.
   end
 end
